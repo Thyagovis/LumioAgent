@@ -1,0 +1,33 @@
+# Python / Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Ambientes Virtuais (venv, uv, conda)
+.venv/
+venv/
+ENV/
+env/
+.venv*/
+
+# Configurações de Ambiente e Variáveis Secretas
+.env
+.env.*
+!.env.example
+
+# Editores de Código e IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Logs e Dados de Execução
+*.log
+logs/
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
