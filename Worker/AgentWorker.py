@@ -1,16 +1,24 @@
-from pydantic_ai import Agent
-from pydantic_ai.models.google import GoogleModel
-from pydantic_ai.providers.google import GoogleProvider
-from Core.config import settings
+from pathlib import Path
 
-model = GoogleModel(
+from pydantic_ai import Agent
+from pydantic_ai.models.openai import OpenAIChatModel
+from pydantic_ai.providers.openai import OpenAIProvider
+
+from Core.config import settings  # ajuste para o caminho real
+
+BASE_DIR = Path(__file__).resolve().parent
+PROMPT_PATH = BASE_DIR / "Input" / "system.md"
+SYSTEM_PROMPT = PROMPT_PATH.read_text(encoding="utf-8")
+
+model = OpenAIChatModel(
     "gemini-3.1-flash-lite",
-    provider=GoogleProvider(api_key=settings.google_api_key)
+    provider=OpenAIProvider(
+        base_url=settings.router_base_url,
+        api_key=settings.router_api_key,
+    ),
 )
 
 agent = Agent(
-    model = model,
-    instructions= "você é um assistente de ia, sua função atual é auxiliar e servir o usuario com tudo que você tem alcance"
+    model,
+    system_prompt=SYSTEM_PROMPT,
 )
-
-
